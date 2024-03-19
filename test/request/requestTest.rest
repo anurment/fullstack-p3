@@ -1,0 +1,28 @@
+GET http://localhost:3001/api/persons
+###
+GET http://localhost:3001/info
+###
+GET http://localhost:3001/api/persons/3
+###
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "number": "3586758693",
+    "name": "martti ahtisaari"
+}
+
+###
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "number": "35867586",
+}
+
+###
+
+DELETE http://localhost:3001/api/persons/1
+
+
+
