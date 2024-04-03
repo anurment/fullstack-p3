@@ -1,5 +1,12 @@
+//express
 const express = require('express')
 const app = express()
+
+
+//cors
+const cors = require('cors')
+app.use(cors())
+
 
 let persons = [
   {
@@ -24,10 +31,18 @@ let persons = [
   },
 ]
 
-
-
+app.use(express.static('dist'))
 
 app.use(express.json())
+
+
+//morgan logging
+var morgan = require('morgan')
+morgan.token('postData', function getPostData (req) {
+  return JSON.stringify(req.body);
+})
+
+app.use(morgan(':method :url :status - :response-time ms :postData'))
 
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>');
@@ -73,22 +88,23 @@ app.delete('/api/persons/:id', (request, response) => {
 })
 
 //part 3.5
-const getRandomInt = (max) => {
+const generateId = (max) => {
     return Math.floor(Math.random() * max);
-} 
+}
+
 
 const getErrors = (body) => {
     let errors = {}
     if (!body.name) {
-        errors.nameMissing = 'name missing from request';
+        errors.nameMissing = "name missing from request";
     } else {
         const person = persons.find(person => person.name.toLowerCase() === body.name.toLowerCase())
         if (person) {
-            errors.uniqueName = 'name must be unique'
+            errors.uniqueName = "name must be unique";
         }
     }
     if (!body.number){
-        errors.numberMissing = 'number missing from request';
+        errors.numberMissing = "number missing from request";
     }
     //console.log(Object.keys(errors).length)
     if (Object.keys(errors).length > 0) {
@@ -101,24 +117,28 @@ const getErrors = (body) => {
 app.post('/api/persons', (request, response) => {
     const body = request.body;
     const errors = getErrors(body);
+    console.log(body)
 
     if(errors){
+        //console.log(errors)
         return response.status(400).json(errors)
     }
 
     const person = {
-        id: getRandomInt(10**16),
+        id: generateId(10**16),
         name: body.name,
         number: body.number,
     }
     persons = persons.concat(person);
-    response.json(persons);
+    response.json(person);
 
 })
 
+app.use(unknownEndpoint)
 
 
-const PORT = 3001
+
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
