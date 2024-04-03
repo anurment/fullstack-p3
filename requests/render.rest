@@ -1,0 +1,43 @@
+GET https://fullstack-p3-7ev3.onrender.com/api/persons
+###
+GET https://fullstack-p3-7ev3.onrender.com/info
+###
+GET https://fullstack-p3-7ev3.onrender.com/api/persons/3
+###
+POST https://fullstack-p3-7ev3.onrender.com/api/persons
+content-type: application/json
+
+{
+    "number": "3586758693",
+    "name": "martti ahtisaari"
+}
+
+###
+POST https://fullstack-p3-7ev3.onrender.com/api/persons
+content-type: application/json
+
+{
+    "number": "35867586"
+}
+
+###
+POST https://fullstack-p3-7ev3.onrender.com/api/persons
+content-type: application/json
+
+{
+    "name": "Tarja Halonen"
+}
+
+###
+POST https://fullstack-p3-7ev3.onrender.com/api/persons
+content-type: application/json
+
+{
+    "name": "arto hellas",
+    "number": "1234567"
+
+}
+
+###
+
+DELETE https://fullstack-p3-7ev3.onrender.com/api/persons/1
