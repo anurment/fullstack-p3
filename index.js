@@ -44,6 +44,10 @@ morgan.token('postData', function getPostData (req) {
 
 app.use(morgan(':method :url :status - :response-time ms :postData'))
 
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>');
 })
