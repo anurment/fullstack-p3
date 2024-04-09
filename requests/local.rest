@@ -1,0 +1,53 @@
+GET http://localhost:3001/api/persons
+###
+GET http://localhost:3001/info
+###
+GET http://localhost:3001/api/persons/3
+###
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "number": "3-1234567",
+    "name": "mara"
+}
+
+###
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "number": "35867586"
+}
+
+###
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "name": "Tarja Halonen"
+}
+
+###
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "name": "arto hellas",
+    "number": "1234567"
+
+}
+
+###
+
+DELETE http://localhost:3001/api/persons/1
+
+###
+PUT http://localhost:3001/api/persons/660d4d6946eebd45acbf23f7
+content-type: application/json
+
+{
+    "name": "Stubb",
+    "number": "12-34567"
+
+}
